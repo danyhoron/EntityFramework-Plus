@@ -57,6 +57,11 @@ namespace Z.EntityFramework.Plus
                 var name = record.GetName(i);
                 var value = record.GetValue(i);
 
+                if (auditEntry.Parent.CurrentOrDefaultConfiguration.IgnoreNullProperties && (value == null || value == DBNull.Value))
+                {
+                    continue;
+                }
+
                 if (auditEntry.Parent.Configuration.UseNullForDBNullValue && value == DBNull.Value)
                 {
                     value = null;
@@ -87,6 +92,11 @@ namespace Z.EntityFramework.Plus
             foreach (var propertyEntry in objectStateEntry.Metadata.GetProperties())
             {
                 var property = objectStateEntry.Property(propertyEntry.Name);
+                
+                if (property.CurrentValue == null && entry.Parent.CurrentOrDefaultConfiguration.IgnoreNullProperties)
+                {
+                    continue;
+                }
 
                 if (property.Metadata.IsKey() || entry.Parent.CurrentOrDefaultConfiguration.IsAuditedProperty(entry.Entry, propertyEntry.Name))
                 {

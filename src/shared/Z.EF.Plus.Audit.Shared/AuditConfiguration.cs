@@ -107,6 +107,10 @@ namespace Z.EntityFramework.Plus
         /// <value>true if unchanged property of a modified entity are audited, false if not.</value>
         public bool IgnorePropertyUnchanged { get; set; }
 
+        /// <summary>Gets or sets a value indingating whether null properties should be audited.</summary>
+        /// <value>true if null properties won't get saved into EntryPropeties</value>
+        public bool IgnoreNullProperties { get; set; }
+
         /// <summary>Gets or sets a dictionary indicating if an entity type or a property name is audited.</summary>
         /// <value>A dictionary indicating if an entity type or a property name is audited.</value>
         public ConcurrentDictionary<string, bool> IsAuditedDictionary { get; set; }
@@ -149,6 +153,7 @@ namespace Z.EntityFramework.Plus
                 IgnoreEntitySoftAdded = IgnoreEntitySoftAdded,
                 IgnoreEntitySoftDeleted = IgnoreEntitySoftDeleted,
                 IgnorePropertyUnchanged = IgnorePropertyUnchanged,
+                IgnoreNullProperties = IgnoreNullProperties,
                 IgnoreRelationshipAdded = IgnoreRelationshipAdded,
                 IgnoreRelationshipDeleted = IgnoreRelationshipDeleted,
                 EntityValueFormatters = new List<Func<object, string, object, Func<object, object>>>(EntityValueFormatters),

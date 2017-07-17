@@ -63,6 +63,11 @@ namespace Z.EntityFramework.Plus
             {
                 var value = keyValue.Value;
 
+                if (audit.Configuration.IgnoreNullProperties && (value == null || value == DBNull.Value))
+                {
+                    continue;
+                }
+
                 if (audit.Configuration.UseNullForDBNullValue && value == DBNull.Value)
                 {
                     value = null;
@@ -79,6 +84,11 @@ namespace Z.EntityFramework.Plus
             foreach (var keyValue in rightKeys.EntityKeyValues)
             {
                 var value = keyValue.Value;
+
+                if (audit.Configuration.IgnoreNullProperties && (value == null || value == DBNull.Value))
+                {
+                    continue;
+                }
 
                 if (audit.Configuration.UseNullForDBNullValue && value == DBNull.Value)
                 {
